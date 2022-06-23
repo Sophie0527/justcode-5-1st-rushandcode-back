@@ -6,14 +6,10 @@ const cors = require('cors');
 
 const routes = require('./routes');
 
-const { getProductsByConditions } = require('./controllers/product');
-
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(routes);
-
-app.get('/products', getProductsByConditions);
 
 const server = http.createServer(app);
 const PORT = process.env.PORT || 10010;
