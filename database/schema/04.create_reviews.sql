@@ -2,6 +2,7 @@ CREATE TABLE reviews
 (
   id INT NOT NULL AUTO_INCREMENT,
   user_id INT NOT NULL,
+  user_name VARCHAR(100) NOT NULL,
   product_id INT NOT NULL,
   name VARCHAR(100) NOT NULL,
   content TEXT NOT NULL,
