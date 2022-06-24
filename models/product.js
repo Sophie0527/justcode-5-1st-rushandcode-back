@@ -1,7 +1,7 @@
 const prisma = require('./prisma-client');
 
 async function readProducts(mainCategory, subCategory, sort) {
-  const productsQuery = `SELECT products.name, products.hashtags, products.price,
+  const productsQuery = `SELECT products.id, products.name, products.hashtags, products.price,
                          JSON_ARRAYAGG(JSON_OBJECT('id', IMG.id, 'url', IMG.image_url)) productImages
                          FROM products
                          JOIN (
