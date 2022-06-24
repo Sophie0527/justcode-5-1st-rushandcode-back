@@ -11,7 +11,7 @@ const productController = async (req, res) => {
   }
 };
 
-const productDetailController = async (req, res) => {
+const productDetail = async (req, res) => {
   try {
     const { id } = req.params;
     const products = await getProductDetail(id);
@@ -22,4 +22,4 @@ const productDetailController = async (req, res) => {
   }
 };
 
-module.exports = { productController, productDetailController };
+module.exports = { productController, productDetail };
