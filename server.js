@@ -11,14 +11,15 @@ app.use(cors());
 app.use(express.json());
 app.use(routes);
 
-app.use((err, req, res, next) =>{
+app.use((err, req, res, next) => {
   if (err) {
-      console.log(err)
-      return res.status(err.statuscode || 500).json({message: err.message || "실패하였습니다. 관리자에게 문의 하세요"});
-  };
-  });
+    console.log(err);
+    return res.status(err.statuscode || 500).json({
+      message: err.message || '실패하였습니다. 관리자에게 문의 하세요',
+    });
+  }
+});
 
-  
 const server = http.createServer(app);
 const PORT = process.env.PORT || 10010;
 server.listen(PORT, () => {
