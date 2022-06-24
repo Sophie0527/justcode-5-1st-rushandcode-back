@@ -59,4 +59,17 @@ async function readProducts(mainCategory, subCategory, sort) {
   }
 }
 
-module.exports = { readProducts };
+async function readProductDetail(id) {
+  const productDetail = await prisma.$queryRaw`
+  SELECT products.*,
+  JSON_ARRAYAGG(JSON_OBJECT('id', IMG.id, 'url', IMG.image_url)) productImages,
+  JSON_ARRAYAGG(JSON_OBJECT('id', REVW.id, 'content', REVW.content, 'stars', REVW.stars)) productReviews
+  FROM products
+  JOIN images as IMG ON IMG.product_id = products.id
+  JOIN reviews as REVW ON REVW.product_id = products.id
+  WHERE products.id=${id}
+  GROUP BY products.id`;
+  return productDetail;
+}
+
+module.exports = { readProducts, readProductDetail };

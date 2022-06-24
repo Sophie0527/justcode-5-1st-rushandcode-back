@@ -1,7 +1,11 @@
-const { readProducts } = require('../models/product');
+const { readProducts, readProductDetail } = require('../models/product');
 
 async function getProducts(mainCategory, subCategory, sort) {
   return await readProducts(mainCategory, subCategory, sort);
 }
 
-module.exports = { getProducts };
+async function getProductDetail(id) {
+  return await readProductDetail(id);
+}
+
+module.exports = { getProducts, getProductDetail };
