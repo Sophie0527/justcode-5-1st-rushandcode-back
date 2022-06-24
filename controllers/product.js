@@ -1,6 +1,6 @@
 const { getProducts } = require('../services/product');
 
-const getProductsByConditions = async (req, res) => {
+const productController = async (req, res) => {
   try {
     const { mainCategory, subCategory, sort } = req.query;
     const products = await getProducts(mainCategory, subCategory, sort);
@@ -11,4 +11,4 @@ const getProductsByConditions = async (req, res) => {
   }
 };
 
-module.exports = { getProductsByConditions };
+module.exports = { productController };

@@ -6,14 +6,10 @@ const cors = require('cors');
 
 const routes = require('./routes');
 
-const { getProductsByConditions } = require('./controllers/product');
-
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(routes);
-
-app.get('/products', getProductsByConditions);
 
 app.use((err, req, res, next) =>{
   if (err) {
@@ -23,7 +19,6 @@ app.use((err, req, res, next) =>{
   });
 
   
-
 const server = http.createServer(app);
 const PORT = process.env.PORT || 10010;
 server.listen(PORT, () => {
