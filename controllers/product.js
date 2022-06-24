@@ -1,9 +1,9 @@
-const { getProducts } = require('../services/product');
+const { getAllProducts } = require('../services/product');
 
-const productController = async (req, res) => {
+const getProducts = async (req, res) => {
   try {
     const { mainCategory, subCategory, sort } = req.query;
-    const products = await getProducts(mainCategory, subCategory, sort);
+    const products = await getAllProducts(mainCategory, subCategory, sort);
     return res.status(200).json({ message: 'OK', products });
   } catch (err) {
     console.log(err);
@@ -11,4 +11,4 @@ const productController = async (req, res) => {
   }
 };
 
-module.exports = { productController };
+module.exports = { getProducts };

@@ -1,7 +1,7 @@
 const { readProducts } = require('../models/product');
 
-async function getProducts(mainCategory, subCategory, sort) {
+async function getAllProducts(mainCategory, subCategory, sort) {
   return await readProducts(mainCategory, subCategory, sort);
 }
 
-module.exports = { getProducts };
+module.exports = { getAllProducts };
