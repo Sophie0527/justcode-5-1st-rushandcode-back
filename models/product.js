@@ -60,16 +60,24 @@ async function readProducts(mainCategory, subCategory, sort) {
 }
 
 async function readProductDetail(id) {
-  const productDetail = await prisma.$queryRaw`
-  SELECT products.*,
-  JSON_ARRAYAGG(JSON_OBJECT('id', IMG.id, 'url', IMG.image_url)) productImages,
-  JSON_ARRAYAGG(JSON_OBJECT('id', REVW.id, 'content', REVW.content, 'stars', REVW.stars)) productReviews
-  FROM products
-  JOIN images as IMG ON IMG.product_id = products.id
-  JOIN reviews as REVW ON REVW.product_id = products.id
-  WHERE products.id=${id}
-  GROUP BY products.id`;
-  return productDetail;
+  const reviewList =
+    await prisma.$queryRaw`select * from reviews where product_id=${id}`;
+
+  const productAndImages = `SELECT products.*, JSON_ARRAYAGG(JSON_OBJECT('id', IMG.id, 'url', IMG.image_url)) productImages`;
+  const reviews = ` JSON_ARRAYAGG(JSON_OBJECT('id', REVW.id, 'content', REVW.content, 'stars', REVW.stars)) productReviews`;
+  const joinImage = ` FROM products JOIN images as IMG ON IMG.product_id = products.id`;
+  const joinReview = ` JOIN reviews as REVW ON REVW.product_id = products.id`;
+  const condition = ` WHERE products.id=${id} GROUP BY products.id`;
+
+  if (reviewList.length !== 0) {
+    return await prisma.$queryRawUnsafe(
+      productAndImages + ',' + reviews + joinImage + joinReview + condition
+    );
+  } else {
+    return await prisma.$queryRawUnsafe(
+      productAndImages + joinImage + condition
+    );
+  }
 }
 
 module.exports = { readProducts, readProductDetail };
