@@ -1,5 +1,7 @@
-const { getProductsByCondition, getProductDetail } = require('../services/product');
-
+const {
+  getProductsByCondition,
+  getProductDetail,
+} = require('../services/product');
 
 const getProducts = async (req, res) => {
   try {
@@ -15,7 +17,6 @@ const getProducts = async (req, res) => {
     return res.status(500).json({ message: err.message });
   }
 };
-
 
 const productDetail = async (req, res) => {
   try {
