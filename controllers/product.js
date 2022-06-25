@@ -1,15 +1,21 @@
-const { getProducts, getProductDetail } = require('../services/product');
+const { getProductsByCondition, getProductDetail } = require('../services/product');
 
-const productController = async (req, res) => {
+
+const getProducts = async (req, res) => {
   try {
     const { mainCategory, subCategory, sort } = req.query;
-    const products = await getProducts(mainCategory, subCategory, sort);
+    const products = await getProductsByCondition(
+      mainCategory,
+      subCategory,
+      sort
+    );
     return res.status(200).json({ message: 'OK', products });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: err.message });
   }
 };
+
 
 const productDetail = async (req, res) => {
   try {
@@ -22,4 +28,4 @@ const productDetail = async (req, res) => {
   }
 };
 
-module.exports = { productController, productDetail };
+module.exports = { getProducts, productDetail };
