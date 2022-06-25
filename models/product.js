@@ -64,7 +64,8 @@ async function readProductDetail(id) {
     await prisma.$queryRaw`select * from reviews where product_id=${id}`;
 
   const productAndImages = `SELECT products.*, JSON_ARRAYAGG(JSON_OBJECT('id', IMG.id, 'url', IMG.image_url)) productImages`;
-  const reviews = ` JSON_ARRAYAGG(JSON_OBJECT('id', REVW.id, 'content', REVW.content, 'stars', REVW.stars)) productReviews`;
+  const reviews = ` JSON_ARRAYAGG(JSON_OBJECT('id', REVW.id, 'content', REVW.content, 'stars', REVW.stars, 'creataed_at', REVW.creataed_at, 
+                                              'user_name', REVW.user_name, 'user_id', REVW.user_id)) productReviews`;
   const joinImage = ` FROM products JOIN images as IMG ON IMG.product_id = products.id`;
   const joinReview = ` JOIN reviews as REVW ON REVW.product_id = products.id`;
   const condition = ` WHERE products.id=${id} GROUP BY products.id`;
