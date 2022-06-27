@@ -14,6 +14,7 @@ async function readProducts(mainCategory, subCategory, sort) {
   const sellCountDesc = ' ORDER BY sell_count desc';
   const main = ` WHERE main_category="${mainCategory}"`;
   const sub = ` AND sub_category="${subCategory}"`;
+  const banner = ` Limit 12`; //임상빈 수정부분
 
   if (mainCategory === undefined) {
     if (sort === 'desc') {
@@ -25,7 +26,12 @@ async function readProducts(mainCategory, subCategory, sort) {
     } else if (sort === 'sell') {
       // 판매인기순
       return await prisma.$queryRawUnsafe(
-        productsQuery + group + sellCountDesc
+        productsQuery + group + sellCountDesc + banner
+      );
+    } else if (sort === 'banner') {
+      // 판매인기순 12개//
+      return await prisma.$queryRawUnsafe(
+        productsQuery + group + sellCountDesc + banner
       );
     }
     // 추천순
