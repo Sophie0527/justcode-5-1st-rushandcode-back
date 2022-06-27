@@ -1,14 +1,18 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-async function createUser(user_id, encryptedPassword, name) {
-  return await prisma.$queryRaw`INSERT INTO users (user_id,password,name) VALUES (${user_id},${encryptedPassword},${name})`;
+async function createUser(user_name, encryptedPassword, name) {
+  return await prisma.$queryRaw`INSERT INTO users (user_name,password,name) VALUES (${user_name},${encryptedPassword},${name})`;
 }
 
-async function readuser(user_id) {
+async function readuser(user_name) {
   const [id] =
-    await prisma.$queryRaw`SELECT users.user_id,users.password From users WHERE users.user_id = ${user_id}`;
+    await prisma.$queryRaw`SELECT users.user_name,users.password From users WHERE users.user_name = ${user_name}`;
   return id;
 }
+async function readUserNameAndId(user_name) {
+  const [data] = await prisma.$queryRaw`SELECT users.user_name,users.id From users WHERE users.user_name = ${user_name}`
+ return data
+}
 
-module.exports = { createUser, readuser };
+module.exports = { createUser, readuser,readUserNameAndId };
