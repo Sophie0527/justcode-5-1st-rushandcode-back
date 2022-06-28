@@ -26,7 +26,7 @@ async function readProducts(mainCategory, subCategory, sort) {
     } else if (sort === 'sell') {
       // 판매인기순
       return await prisma.$queryRawUnsafe(
-        productsQuery + group + sellCountDesc + banner
+        productsQuery + group + sellCountDesc
       );
     } else if (sort === 'banner') {
       // 판매인기순 12개//
