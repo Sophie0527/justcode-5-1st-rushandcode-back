@@ -19,4 +19,7 @@ const productDetail = async (req, res) => {
   return res.status(200).json({ message: 'OK', products });
 };
 
-module.exports = { getProducts, productDetail };
+module.exports = {
+  getProducts,
+  productDetail,
+};
