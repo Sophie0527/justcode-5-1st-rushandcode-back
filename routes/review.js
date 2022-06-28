@@ -7,7 +7,7 @@ const {
 
 const router = express.Router();
 
-router.post('/review/:id', postReviews);
+router.post('/review', postReviews);
 
 router.put('/review/:id', putReviews);
 
