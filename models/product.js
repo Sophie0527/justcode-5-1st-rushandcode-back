@@ -1,4 +1,3 @@
-const { $queryRaw } = require('./prisma-client');
 const prisma = require('./prisma-client');
 
 async function readProducts(mainCategory, subCategory, sort) {
