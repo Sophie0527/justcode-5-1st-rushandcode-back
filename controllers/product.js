@@ -29,4 +29,7 @@ const productDetail = async (req, res) => {
   }
 };
 
-module.exports = { getProducts, productDetail };
+module.exports = {
+  getProducts,
+  productDetail,
+};

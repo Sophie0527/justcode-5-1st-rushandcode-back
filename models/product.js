@@ -1,3 +1,4 @@
+const { $queryRaw } = require('./prisma-client');
 const prisma = require('./prisma-client');
 
 async function readProducts(mainCategory, subCategory, sort) {
@@ -81,4 +82,7 @@ async function readProductDetail(id) {
   }
 }
 
-module.exports = { readProducts, readProductDetail };
+module.exports = {
+  readProducts,
+  readProductDetail,
+};
