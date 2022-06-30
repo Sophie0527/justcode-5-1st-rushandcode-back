@@ -14,7 +14,7 @@ async function readProducts(mainCategory, subCategory, sort) {
   const sellCountDesc = ' ORDER BY sell_count desc';
   const main = ` WHERE main_category="${mainCategory}"`;
   const sub = ` AND sub_category="${subCategory}"`;
-  const banner = ` Limit 12`; 
+  const banner = ` Limit 12`;
 
   if (mainCategory === undefined) {
     if (sort === 'desc') {
@@ -58,7 +58,7 @@ async function readProducts(mainCategory, subCategory, sort) {
       );
     } else if (sort === 'sell') {
       return await prisma.$queryRawUnsafe(
-        productsQuery + main + sub + group + sell
+        productsQuery + main + sub + group + sellCountDesc
       );
     }
     return await prisma.$queryRawUnsafe(productsQuery + main + sub + group);
