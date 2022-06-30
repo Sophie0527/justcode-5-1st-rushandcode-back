@@ -7,8 +7,13 @@ async function createUser(user_name, encryptedPassword, name) {
 
 async function readuser(user_name) {
   const [id] =
-    await prisma.$queryRaw`SELECT users.user_name,users.password From users WHERE users.user_name = ${user_name}`;
+    await prisma.$queryRaw`SELECT users.user_name,users.password,users.name From users WHERE users.user_name = ${user_name}`;
   return id;
+}
+async function readname(name) {
+  const [naming] =
+    await prisma.$queryRaw`SELECT users.user_name,users.password,users.name From users WHERE users.name = ${name}`;
+  return naming;
 }
 async function readUserNameAndId(user_name) {
   const [data] =
@@ -16,4 +21,4 @@ async function readUserNameAndId(user_name) {
   return data;
 }
 
-module.exports = { createUser, readuser, readUserNameAndId };
+module.exports = { createUser, readuser, readUserNameAndId, readname };

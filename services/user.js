@@ -1,13 +1,25 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { readuser, createUser, readUserNameAndId } = require('../models/user');
+const {
+  readuser,
+  createUser,
+  readUserNameAndId,
+  readname,
+} = require('../models/user');
 
 async function signup(user_name, password, name) {
   const id = await readuser(user_name);
+  const naming = await readname(name);
+  console.log(id);
 
   if (id) {
     const error = new Error('이미존재합니다.');
     error.statusCode = 400;
+    throw error;
+  }
+  if (naming) {
+    const error = new Error('이미존재합니다.');
+    error.statuCode = 400;
     throw error;
   }
 
