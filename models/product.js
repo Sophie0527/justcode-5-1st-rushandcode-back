@@ -29,7 +29,7 @@ async function readProducts(mainCategory, subCategory, sort) {
         productsQuery + group + sellCountDesc
       );
     } else if (sort === 'banner') {
-      // 판매인기순 12개//
+      // 판매인기순 12개
       return await prisma.$queryRawUnsafe(
         productsQuery + group + sellCountDesc + banner
       );
