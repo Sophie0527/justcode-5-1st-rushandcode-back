@@ -1,4 +1,3 @@
-const { $queryRaw } = require('./prisma-client');
 const prisma = require('./prisma-client');
 
 async function readProducts(mainCategory, subCategory, sort) {
@@ -15,7 +14,7 @@ async function readProducts(mainCategory, subCategory, sort) {
   const sellCountDesc = ' ORDER BY sell_count desc';
   const main = ` WHERE main_category="${mainCategory}"`;
   const sub = ` AND sub_category="${subCategory}"`;
-  const banner = ` Limit 12`; 
+  const banner = ` Limit 12`;
 
   if (mainCategory === undefined) {
     if (sort === 'desc') {
@@ -30,7 +29,7 @@ async function readProducts(mainCategory, subCategory, sort) {
         productsQuery + group + sellCountDesc
       );
     } else if (sort === 'banner') {
-      // 판매인기순 12개//
+      // 판매인기순 12개
       return await prisma.$queryRawUnsafe(
         productsQuery + group + sellCountDesc + banner
       );
@@ -59,7 +58,7 @@ async function readProducts(mainCategory, subCategory, sort) {
       );
     } else if (sort === 'sell') {
       return await prisma.$queryRawUnsafe(
-        productsQuery + main + sub + group + sell
+        productsQuery + main + sub + group + sellCountDesc
       );
     }
     return await prisma.$queryRawUnsafe(productsQuery + main + sub + group);

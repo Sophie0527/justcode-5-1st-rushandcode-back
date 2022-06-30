@@ -9,9 +9,7 @@ const signupController = async (req, res) => {
 const loginController = async (req, res) => {
   const { user_name, password } = req.body;
   const data = await login(user_name, password);
-  return res
-    .status(201)
-    .json({ data: data });
+  return res.status(201).json({ data: data });
 };
 
 module.exports = { signupController, loginController };
