@@ -29,12 +29,12 @@ async function signup(user_name, password, name) {
     throw error;
   }
 
-  if (password.length < 8) {
+  if (password.length < 7) {
     const error = new Error('PASSWORD가 너무 짧습니다.');
     error.statuCode = 400;
     throw error;
   }
-  if (name.length < 2) {
+  if (name.length < 1) {
     const error = new Error('실명을 작성하세요');
     error.statuCode = 400;
     throw error;
@@ -58,7 +58,7 @@ async function login(user_name, password) {
     throw error;
   }
 
-  if (password.length < 8) {
+  if (password.length < 7) {
     const error = new Error('PASSWORD가 너무 짧습니다.');
     error.statuCode = 400;
     throw error;
