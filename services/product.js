@@ -9,7 +9,7 @@ async function getProductDetail(id) {
 
   const filter = (arr, key) => {
     for (let i = 0; i < getProductDetail.length; i++) {
-      let filteredItem = arr[i]?.filter((item, idx) => {
+      let filteredItem = arr[i].filter((item, idx) => {
         return (
           arr[i].findIndex(item2 => {
             return item.id === item2.id;
